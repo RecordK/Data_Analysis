@@ -90,3 +90,53 @@ fig.suptitle('pH & acid hist plot', fontsize = 40)
 
 plt.show()
 
+plt.figure(figsize=(20,10))
+
+heat_table = train.drop(['id'], axis=1).corr()
+heatmap_ax = sns.heatmap(heat_table, annot=True, cmap='coolwarm')
+heatmap_ax.set_xticklabels(heatmap_ax.get_xticklabels(), fontsize=15, rotation=45)
+heatmap_ax.set_yticklabels(heatmap_ax.get_yticklabels(), fontsize=15)
+plt.title('correlation between Wine features', fontsize=40)
+plt.show()
+
+fig, axes = plt.subplots(1, 2, figsize=(2.33 * 10, 1 * 10))
+
+for i, ax in enumerate(axes):
+    if i == 0:
+        sns.histplot(x= 'free sulfur dioxide', y= 'total sulfur dioxide', ax= ax, hue= 'quality',data= train)
+    else:
+        sns.histplot(x= 'free sulfur dioxide', y= 'total sulfur dioxide', ax= ax, hue= 'type',data= train)
+        
+axes[0].set_title('divided with quality', fontsize=20)
+axes[1].set_title('divided with type', fontsize=20)
+fig.suptitle('total & free sulfur dioxide hist plot', fontsize= 40)
+plt.show()
+
+fig, axes = plt.subplots(1, 2, figsize=(2.33 * 10, 1 * 10))
+
+for i, ax in enumerate(axes):
+    if i == 0:
+        sns.histplot(x= 'density', y= 'alcohol', ax= ax, hue= 'quality',data= train)
+    else:
+        sns.histplot(x= 'density', y= 'alcohol', ax= ax, hue= 'type',data= train)
+        
+axes[0].set_title('divided with quality', fontsize=20)
+axes[1].set_title('divided with type', fontsize=20)
+fig.suptitle('density & alcohol hist plot', fontsize= 40)
+plt.show()
+
+fig, axes = plt.subplots(1, 2, figsize=(2.33 * 10, 1 * 10))
+
+for i, ax in enumerate(axes):
+    if i == 0:
+        sns.histplot(x= 'density', y= 'alcohol', bins=50, ax= ax, hue= 'quality',data= train)
+        ax.add_patch(patches.Ellipse((1.0385, 11.7), .001, .5, color='r', fill=False))
+    else:
+        sns.histplot(x= 'density', y= 'alcohol', bins=50, ax= ax, hue= 'type',data= train)
+        ax.add_patch(patches.Ellipse((1.0385, 11.7), .001, .5, color='r', fill=False))
+        
+axes[0].set_title('divided with quality', fontsize=20)
+axes[1].set_title('divided with type', fontsize=20)
+fig.suptitle('density & alcohol hist plot', fontsize= 40)
+plt.show()
+
